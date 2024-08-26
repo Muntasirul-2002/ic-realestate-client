@@ -19,7 +19,7 @@ const PopularAreas = () => {
     <div className={`${darkMode ? "dark bg-black" : "light bg-transparent"}`}>
       <section
         className={`${
-          darkMode ? "dark bg-gray-800" : "light bg-violet-200"
+          darkMode ? "dark bg-gray-800" : "light bg-violet-300"
         } lg:w-[90%] w-full h-fit m-auto bg-cover bg-center rounded-xl flex justify-center flex-col items-center lg:px-20 px-6 py-20 gap-20`}
       >
         <div

@@ -1,29 +1,25 @@
-import React from 'react'
-import Header from './components/Header'
-import Hero from './sections/Hero'
-import About from './sections/About'
-import PopularAreas from './sections/PopularAreas'
-import Properties from './sections/Properties'
-import Services from './sections/Services'
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
 import Footer from './components/Footer'
-import Clients from './sections/Clients'
-import Contact from './sections/Contact'
+import AboutusPage from "./pages/AboutusPage";
+import PropertiesPage from "./pages/PropertiesPage";
+import ServicesPage from "./pages/ServicesPage";
+import ContactPage from "./pages/ContactPage";
 const App = () => {
   return (
     <>
-    
-      <Header/>
-      <Hero/>
-      <About/>
-      <PopularAreas/>
-      <Properties/>
-      <Services/>
-      <Clients/>
-      <Contact/>
-      <Footer/>
-   
+     
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutusPage/>} />
+        <Route path="/services" element={<ServicesPage/>}/>
+        <Route path="/properties" element={<PropertiesPage/>} />
+        <Route path="/contact" element={<ContactPage/>} />
+      </Routes>
+      <Footer />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

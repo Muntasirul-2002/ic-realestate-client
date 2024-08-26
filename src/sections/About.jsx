@@ -53,7 +53,7 @@ const About = () => {
           </p>
           <button
             type="submit"
-            className="bg-blue-700 dark:bg-blue-600 hover:bg-blue-800 dark:hover:bg-blue-700 dark:hover:text-black text-lg p-4 text-white font-semibold rounded-xl cursor-pointer transform hover:scale-110 transition-transform duration-300"
+            className="bg-violet-700 dark:bg-violet-600 hover:bg-violet-800 dark:hover:bg-violet-700 dark:hover:text-black text-lg p-4 text-white font-semibold rounded-xl cursor-pointer transform hover:scale-110 transition-transform duration-300"
           >
             Read More
           </button>

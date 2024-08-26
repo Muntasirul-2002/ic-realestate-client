@@ -56,14 +56,14 @@ const Hero = () => {
             <input
               type="text"
               placeholder="Enter a address"
-              className="bg-white p-2 w-full mt-2 border border-b-[1px] border-[#c9c7c1]"
+              className="bg-white p-2 w-full mt-2 border border-b-[1px] border-[#c9c7c1] rounded-md"
             />
           </div>
           <div className="w-full">
             <h1 className="text-black font-semibold dark:text-white">Type</h1>
             <select
               name="selectOption"
-              className="bg-white p-2 border-b-[1px] w-full mt-2 border-[#c9c7c1] text-gray-500 text-md"
+              className="bg-white p-2 border-b-[1px] w-full mt-2 border-[#c9c7c1] text-gray-500 rounded-md text-md"
               id="selectOption"
             >
               <option value="" disabled selected>
@@ -81,7 +81,7 @@ const Hero = () => {
             </h1>
             <select
               name="selectOption"
-              className="bg-white p-2 border-b-[1px] w-full mt-2 border-[#c9c7c1] text-gray-500 text-md"
+              className="bg-white rounded-md p-2 border-b-[1px] w-full mt-2 border-[#c9c7c1] text-gray-500 text-md"
               id="selectOption"
             >
               <option value="" disabled selected>
@@ -97,7 +97,7 @@ const Hero = () => {
           <div className="w-full">
             <button
               type="submit"
-              className="bg-blue-700 dark:bg-blue-600 hover:bg-blue-800 dark:hover:bg-blue-700 dark:hover:text-black text-lg p-4 w-full text-white font-semibold rounded-xl cursor-pointer transform hover:scale-110 transition-transform duration-300"
+              className="bg-violet-600 dark:bg-violet-600 hover:bg-violet-800 dark:hover:bg-violet-700 dark:hover:text-black text-lg p-4 w-full text-white font-semibold rounded-xl cursor-pointer transform hover:scale-110 transition-transform duration-300"
             >
               Submit
             </button>
