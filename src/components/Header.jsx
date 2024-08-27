@@ -8,6 +8,8 @@ import {
   FaPhoneAlt,
   FaUserCircle,
 } from "react-icons/fa";
+import { SlLogin } from "react-icons/sl";
+import { SiGnuprivacyguard } from "react-icons/si";
 import logo from "../assets/images/logo.png";
 import { useDarkMode } from "./DarkModeContext";
 
@@ -38,7 +40,7 @@ const Header = () => {
     },
     {
       link: "Property",
-      path: "/properties",
+      path: "/property",
     },
     {
       link: "Contact",
@@ -107,9 +109,15 @@ const Header = () => {
       </div>
       <div className="flex justify-center items-center lg:gap-8 gap-4">
         <div className="flex justify-center items-center lg:gap-3 gap-1">
-          <FaPhoneAlt className="size-5 text-violet-600" />
+          <SlLogin className="size-5 text-violet-600" />
           <h1 className="lg:text-xl text-sm text-black dark:text-white font-semibold">
-            6294268784
+            Singup
+          </h1>
+        </div>
+        <div className="flex justify-center items-center lg:gap-3 gap-1">
+          <SiGnuprivacyguard className="size-5 text-violet-600" />
+          <h1 className="lg:text-xl text-sm text-black dark:text-white font-semibold">
+            Login
           </h1>
         </div>
         <FaUserCircle className="size-6 cursor-pointer text-violet-600" />
