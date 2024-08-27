@@ -15,7 +15,7 @@ import { MdSpaceDashboard } from "react-icons/md";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import axios from "axios";
-import { toast } from "react-toastify";
+
 import { useNavigate, Link } from "react-router-dom";
 import { TbListDetails } from "react-icons/tb";
 import { WhatsappShareButton } from "react-share";
@@ -34,7 +34,7 @@ const Properties = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong");
+    
     }
   };
   useEffect(() => {

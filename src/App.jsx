@@ -7,12 +7,12 @@ import PropertiesPage from "./pages/PropertiesPage";
 import ServicesPage from "./pages/ServicesPage";
 import ContactPage from "./pages/ContactPage";
 import Header from "./components/Header";
-import { ToastContainer } from "react-toastify";
+
 import PropertyDetails from "./pages/PropertyDetails";
 const App = () => {
   return (
     <>
-    <ToastContainer/>
+    
      <Header/>
       <Routes>
         <Route path="/" element={<HomePage />} />

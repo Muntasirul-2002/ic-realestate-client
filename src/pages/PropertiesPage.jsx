@@ -7,7 +7,6 @@ import {
   FaBath,
   FaBed,
   FaUserCircle,
-  FaPlus,
   FaMapMarkerAlt,
   FaVideo,
   FaCamera,
@@ -36,7 +35,7 @@ const PropertiesPage = () => {
   const shareUrl = `${propertyUrl}/property`;
   const location = useLocation();
   const navigate = useNavigate();
-  const { darkMode, toggleDarkMode } = useDarkMode();
+  const { darkMode } = useDarkMode();
 
   useEffect(() => {
     AOS.init({
@@ -58,7 +57,7 @@ const PropertiesPage = () => {
         setAllProperties(response.data.viewProperty || []);
         setTotalPage(Math.ceil(response.data.totalProperties / 8));
       } else {
-        toast.error("Something went wrong");
+       
       }
     } catch (error) {
       console.log("Error in fetching properties:", error);
