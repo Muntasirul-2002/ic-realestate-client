@@ -18,7 +18,7 @@ import { WhatsappIcon } from "react-share";
 import { MdSpaceDashboard } from "react-icons/md";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { toast } from "react-toastify";
+import {Link} from 'react-router-dom'
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import hero from "../assets/images/hero1.webp";
@@ -214,6 +214,7 @@ const PropertiesPage = () => {
                   className="bg-white dark:bg-gray-800 rounded-xl w-full"
                 >
                   {property.images && property.images.length > 0 ? (
+                    <Link to={`/property/${property.slug}`}>
                     <div
                       id="image-box"
                       className="bg-cover bg-center h-[250px] rounded-xl p-4 flex flex-col justify-between items-end"
@@ -246,7 +247,7 @@ const PropertiesPage = () => {
                         <div className="flex justify-start items-center gap-2">
                           <FaMapMarkerAlt className="size-4 text-white" />
 
-                          <h1 className="text-white">{property.description}</h1>
+                          <h1 className="text-white font-bold">{property.location}</h1>
                         </div>
                         <div className="flex justify-center items-center gap-4">
                           <FaVideo className="size-4 text-white" />
@@ -254,6 +255,7 @@ const PropertiesPage = () => {
                         </div>
                       </div>
                     </div>
+                    </Link>
                   ) : (
                     <div
                       id="image-box"
