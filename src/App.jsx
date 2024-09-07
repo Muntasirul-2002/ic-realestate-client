@@ -9,6 +9,8 @@ import ContactPage from "./pages/ContactPage";
 import Header from "./components/Header";
 
 import PropertyDetails from "./pages/PropertyDetails";
+import Login from "./components/auth/Login";
+
 const App = () => {
   return (
     <>
@@ -16,6 +18,8 @@ const App = () => {
      <Header/>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<Login/>} />
+       
         <Route path="/about" element={<AboutusPage/>} />
         <Route path="/services" element={<ServicesPage/>}/>
         <Route path="/property/*" element={<PropertiesPage/>} />

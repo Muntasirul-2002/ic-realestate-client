@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {
   FaTimes,
   FaBars,
-  FaMoon,
-  FaSun,
-  FaPhoneAlt,
   FaUserCircle,
 } from "react-icons/fa";
 import { SlLogin } from "react-icons/sl";
@@ -108,26 +105,18 @@ const Header = () => {
         </ul>
       </div>
       <div className="flex justify-center items-center lg:gap-8 gap-4">
-        <div className="flex justify-center items-center lg:gap-3 gap-1">
-          <SlLogin className="size-5 text-violet-600" />
-          <h1 className="lg:text-xl text-sm text-black dark:text-white font-semibold">
-            Singup
-          </h1>
-        </div>
+       
+        <NavLink to='/login'>
         <div className="flex justify-center items-center lg:gap-3 gap-1">
           <SiGnuprivacyguard className="size-5 text-violet-600" />
           <h1 className="lg:text-xl text-sm text-black dark:text-white font-semibold">
-            Login
+          Member Login
           </h1>
         </div>
+        </NavLink>
         <FaUserCircle className="size-6 cursor-pointer text-violet-600" />
       </div>
-      {/* <button
-        onClick={toggleDarkMode}
-        className="ml-4 text-white dark:text-white rounded-full bg-violet-500"
-      >
-        {darkMode ?<FaMoon size={25} className="text-black"/>:<FaSun size={25} className="text-black"/>}
-      </button> */}
+      
     </nav>
   );
 };

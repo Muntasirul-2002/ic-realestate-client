@@ -10,7 +10,7 @@ import {
   FaCamera,
   FaHeart,
 } from "react-icons/fa";
-import notfound from '../assets/images/notfound.png'
+import notfound from "../assets/images/notfound.png";
 import { MdSpaceDashboard } from "react-icons/md";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -34,7 +34,6 @@ const Properties = () => {
       }
     } catch (error) {
       console.log(error);
-    
     }
   };
   useEffect(() => {
@@ -79,46 +78,49 @@ const Properties = () => {
                 data-aos-delay="200"
                 className="bg-white dark:bg-gray-800 rounded-xl w-full"
               >
-
                 {p.images && p.images.length > 0 ? (
-                  <div
-                    id="image-box"
-                    className="bg-cover bg-center h-[250px] rounded-xl p-4 flex flex-col justify-between items-end"
-                    style={{ backgroundImage: `url(${url}/image/${p.images[0]})` }}
-                  >
+                  <Link to={`/property/${p.slug}`}>
                     <div
-                      id="top"
-                      className="flex justify-between items-end w-full"
+                      id="image-box"
+                      className="bg-cover bg-center h-[250px] rounded-xl p-4 flex flex-col justify-between items-end"
+                      style={{
+                        backgroundImage: `url(${url}/image/${p.images[0]})`,
+                      }}
                     >
-                      <div>
-                        <button className="px-3 py-1 bg-violet-400 hover:bg-white hover:text-black text-white rounded-lg text-[13px] font-semibold">
-                          {p.featured[1] || "Hot"}
-                        </button>
+                      <div
+                        id="top"
+                        className="flex justify-between items-end w-full"
+                      >
+                        <div>
+                          <button className="px-3 py-1 bg-violet-400 hover:bg-white hover:text-black text-white rounded-lg text-[13px] font-semibold">
+                            {p.featured[1] || "Hot"}
+                          </button>
+                        </div>
+                        <div className="flex justify-between items-center gap-3">
+                          <button className="px-3 py-1 bg-violet-400 hover:bg-white hover:text-black text-white rounded-lg text-[13px] font-semibold">
+                            {p.purpose}
+                          </button>
+                          <button className="px-3 py-1 bg-violet-400 hover:bg-white hover:text-black text-white rounded-lg text-[13px] font-semibold">
+                            {p.featured[0]}
+                          </button>
+                        </div>
                       </div>
-                      <div className="flex justify-between items-center gap-3">
-                        <button className="px-3 py-1 bg-violet-400 hover:bg-white hover:text-black text-white rounded-lg text-[13px] font-semibold">
-                          {p.purpose}
-                        </button>
-                        <button className="px-3 py-1 bg-violet-400 hover:bg-white hover:text-black text-white rounded-lg text-[13px] font-semibold">
-                          {p.featured[0]}
-                        </button>
-                      </div>
-                    </div>
-                    <div
-                      id="bottom"
-                      className="flex justify-between items-end w-full"
-                    >
-                      <div className="flex justify-start items-center gap-2">
-                        <FaMapMarkerAlt className="size-4 text-white" />
+                      <div
+                        id="bottom"
+                        className="flex justify-between items-end w-full"
+                      >
+                        <div className="flex justify-start items-center gap-2">
+                          <FaMapMarkerAlt className="size-4 text-white" />
 
-                        <h1 className="text-white">{p.location}</h1>
-                      </div>
-                      <div className="flex justify-center items-center gap-4">
-                        <FaVideo className="size-4 text-white" />
-                        <FaCamera className="size-4 text-white" />
+                          <h1 className="text-white">{p.location}</h1>
+                        </div>
+                        <div className="flex justify-center items-center gap-4">
+                          <FaVideo className="size-4 text-white" />
+                          <FaCamera className="size-4 text-white" />
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ) : (
                   <div
                     id="image-box"
@@ -201,21 +203,21 @@ const Properties = () => {
                     </div>
                     <div className="flex justify-center items-center gap-4">
                       <div className="p-2 border-2 border-gray-200 hover:bg-black cursor-pointer transform hover:scale-110 transition-transform duration-300">
-                        <WhatsappShareButton 
-                        url={shareUrl}
-                        title={`Checkout out this property: ${p.title}`}
-                        separator="::"
+                        <WhatsappShareButton
+                          url={shareUrl}
+                          title={`Checkout out this property: ${p.title}`}
+                          separator="::"
                         >
-                        <FaShareAlt className="size-4 text-violet-500" />
+                          <FaShareAlt className="size-4 text-violet-500" />
                         </WhatsappShareButton>
                       </div>
                       <div className="p-2 border-2 border-gray-200 hover:bg-black cursor-pointer transform hover:scale-110 transition-transform duration-300">
                         <FaHeart className="size-4 text-violet-500" />
                       </div>
                       <Link to={`/property/${p.slug}`}>
-                      <div className="p-2 border-2 border-gray-200 hover:bg-black cursor-pointer transform hover:scale-110 transition-transform duration-300">
-                        <TbListDetails className="size-4 text-violet-500" />
-                      </div>
+                        <div className="p-2 border-2 border-gray-200 hover:bg-black cursor-pointer transform hover:scale-110 transition-transform duration-300">
+                          <TbListDetails className="size-4 text-violet-500" />
+                        </div>
                       </Link>
                     </div>
                   </div>
