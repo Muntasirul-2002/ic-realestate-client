@@ -12,19 +12,19 @@ import PropertyDetails from "./pages/PropertyDetails";
 import Login from "./components/auth/Login";
 
 const App = () => {
+  const url = "http://localhost:8080"
   return (
     <>
-    
      <Header/>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login/>} />
+        <Route path="/" element={<HomePage url={url} />} />
+        <Route path="/login" element={<Login url={url} />} />
        
-        <Route path="/about" element={<AboutusPage/>} />
-        <Route path="/services" element={<ServicesPage/>}/>
-        <Route path="/property/*" element={<PropertiesPage/>} />
-        <Route path="/property/:slug" element={<PropertyDetails/>} />
-        <Route path="/contact" element={<ContactPage/>} />
+        <Route path="/about" element={<AboutusPage url={url} />} />
+        <Route path="/services" element={<ServicesPage url={url} />}/>
+        <Route path="/property/*" element={<PropertiesPage url={url} />} />
+        <Route path="/property/:slug" element={<PropertyDetails url={url} />} />
+        <Route path="/contact" element={<ContactPage url={url} />} />
       </Routes>
       <Footer />
     </>
