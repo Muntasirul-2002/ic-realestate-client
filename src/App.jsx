@@ -26,7 +26,7 @@ import AdminLoggedInProfile from "./dashboard/components/ShortCutsPages/AdminLog
 import Calculator from "./dashboard/components/ShortCutsPages/Calculator";
 
 const App = () => {
-  const url = "http://localhost:8080";
+  const url = "https://ic-realestate-server.onrender.com";
   const location = useLocation();
   //check if the current path includes '/dashboard'
   const isDashboard = location.pathname.includes("/dashboard");
