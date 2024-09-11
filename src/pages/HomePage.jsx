@@ -9,7 +9,7 @@ import Contact from "../sections/Contact";
 
 
 const HomePage = () => {
-  const url = "http://localhost:8080"
+  const url = "https://ic-realestate-server.onrender.com"
   return (
     <div>
       <Hero url={url}/>
