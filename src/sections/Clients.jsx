@@ -14,7 +14,7 @@ const Clients = () => {
       delay: 100,
     });
   }, []);
-  const { darkMode, toggleDarkMode } = useDarkMode();
+  const { darkMode } = useDarkMode();
   return (
     <div className={`${darkMode ? "dark bg-black" : "light bg-transparent"}`}>
       <section

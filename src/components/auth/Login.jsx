@@ -5,35 +5,36 @@ import { TbPasswordMobilePhone } from "react-icons/tb";
 import { useAuth } from "../../context/auth";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-const Login = ({url}) => {
-  const [email,setEmail] = useState()
-  const [password,setPassword] = useState()
-  const [auth,setAuth] = useAuth()
-  const navigate = useNavigate()
+import { axiosInstance, getConfig } from "../../utils/ApiRequest";
+const Login = ({ url }) => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [auth, setAuth] = useAuth();
+  const navigate = useNavigate();
 
-  const handleSubmit = async(e) =>{
-  e.preventDefault()
-  try {
-    const response = await axios.post(`${url}/api/v1/auth/login`,{
-      email,
-      password
-    })
-    if(response.data && response.data.success){
-alert("Login successful")
-setAuth({
-  ...auth,
-  user: response.data.user,
-  token: response.data.token
-})
-localStorage.setItem("auth", JSON.stringify(response.data))
-window.location.href("/")
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await getConfig()
+      const response = await axiosInstance.post(`/api/v1/auth/login`, {
+        email,
+        password,
+      });
+      if (response && response.data.success) {
+        alert("Login successful");
+        setAuth({
+          ...auth,
+          user: response.data.user,
+          token: response.data.token,
+        });
+        localStorage.setItem("auth", JSON.stringify(response.data));
+        navigate('/')
+      }
+    } catch (error) {
+      console.log("Error in login", error);
     }
-  } catch (error) {
-    console.log("Error in login", error)
-  }
-  }
+  };
 
-  
   return (
     <div>
       <div>
@@ -300,7 +301,7 @@ window.location.href("/")
                           value={email}
                           id="exampleInputEmail"
                           required
-                          onChange={(e)=> setEmail(e.target.value)}
+                          onChange={(e) => setEmail(e.target.value)}
                           className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                           placeholder="muntasirul@example.com"
                         />
@@ -319,7 +320,7 @@ window.location.href("/")
                         <input
                           type="password"
                           value={password}
-                          onChange={(e)=> setPassword(e.target.value)}
+                          onChange={(e) => setPassword(e.target.value)}
                           required
                           className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                           placeholder="************"
@@ -329,7 +330,10 @@ window.location.href("/")
                   </div>
                   <div className="flex -mx-3">
                     <div className="w-full px-3 mb-5">
-                      <button type="submit" className="block w-full max-w-xs mx-auto bg-violet-500 hover:bg-violet-700 focus:bg-violet-700 text-white rounded-lg px-3 py-3 font-semibold">
+                      <button
+                        type="submit"
+                        className="block w-full max-w-xs mx-auto bg-violet-500 hover:bg-violet-700 focus:bg-violet-700 text-white rounded-lg px-3 py-3 font-semibold"
+                      >
                         Login
                       </button>
                     </div>

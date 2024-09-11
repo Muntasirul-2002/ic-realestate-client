@@ -9,15 +9,16 @@ import Contact from "../sections/Contact";
 
 
 const HomePage = () => {
+  const url = "http://localhost:8080"
   return (
     <div>
-      <Hero />
-      <About />
-      <PopularAreas />
-      <Properties />
-      <Services />
-      <Clients />
-      <Contact />
+      <Hero url={url}/>
+      <About url={url} />
+      <PopularAreas  url={url}/>
+      <Properties url={url} />
+      <Services url={url} />
+      <Clients url={url} />
+      <Contact url={url} />
       
     </div>
   );

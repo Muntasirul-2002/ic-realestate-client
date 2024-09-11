@@ -14,9 +14,9 @@ import {
 } from "react-icons/fa6";
 import { PiMapPinSimpleAreaBold } from "react-icons/pi";
 import { useDarkMode } from "../components/DarkModeContext";
+import { axiosInstance,getConfig } from "../utils/ApiRequest";
 
-const PropertyDetails = () => {
-  const url = "http://localhost:8080";
+const PropertyDetails = ({url}) => {
   const params = useParams();
   const {darkMode} = useDarkMode()
   const [productDetails, setProductDetails] = useState({});
@@ -24,8 +24,9 @@ const PropertyDetails = () => {
 
   const getProductDetails = async () => {
     try {
-      const { data } = await axios.get(
-        `${url}/api/v1/property/view-property/${params.slug}`
+      await getConfig()
+      const { data } = await axiosInstance.get(
+        `/api/v1/property/view-property/${params.slug}`
       );
       setProductDetails(data.viewSingleProperty || []);
       getRelatedProperties(
@@ -45,8 +46,9 @@ const PropertyDetails = () => {
   //function for getting related properties
   const getRelatedProperties = async (pid, type) => {
     try {
-      const { data } = await axios.get(
-        `${url}/api/v1/property/related/${pid}/${type}`
+      await getConfig()
+      const { data } = await axiosInstance.get(
+        `/api/v1/property/related/${pid}/${type}`
       );
       setRelatedProperties(data.properties);
       console.log("related properties: ", data.properties);

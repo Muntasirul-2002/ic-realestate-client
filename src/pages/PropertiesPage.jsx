@@ -1,8 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDarkMode } from "../components/DarkModeContext";
 import notfound from "../assets/images/notfound.png";
-import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
+import { TbListDetails } from "react-icons/tb";
+import { WhatsappShareButton } from "react-share";
+import { WhatsappIcon } from "react-share";
+import { MdSpaceDashboard } from "react-icons/md";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Link } from "react-router-dom";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import hero from "../assets/images/hero1.webp";
+import real2 from "../assets/images/real2.jpg";
+import real3 from "../assets/images/real3.jpg";
+import real4 from "../assets/images/real4.jpg";
+import { axiosInstance, getConfig } from "../utils/ApiRequest";
 import {
   FaBath,
   FaBed,
@@ -12,26 +25,12 @@ import {
   FaCamera,
   FaHeart,
 } from "react-icons/fa";
-import { TbListDetails } from "react-icons/tb";
-import { WhatsappShareButton } from "react-share";
-import { WhatsappIcon } from "react-share";
-import { MdSpaceDashboard } from "react-icons/md";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import {Link} from 'react-router-dom'
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import hero from "../assets/images/hero1.webp";
-import real2 from "../assets/images/real2.jpg";
-import real3 from "../assets/images/real3.jpg";
-import real4 from "../assets/images/real4.jpg";
 
-const PropertiesPage = () => {
+const PropertiesPage = ({url}) => {
   const [allProperties, setAllProperties] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
-  const url = "http://localhost:8080";
-  const propertyUrl = "http://localhost:5173";
+ const propertyUrl = "http://localhost:5173";
   const shareUrl = `${propertyUrl}/property`;
   const location = useLocation();
   const navigate = useNavigate();
@@ -49,20 +48,24 @@ const PropertiesPage = () => {
   //fetch all the properties
   const getAllProperties = async () => {
     try {
-      const response = await axios.get(`${url}/api/v1/property/view-property`, {
-        params: { property: currentPage },
-      });
+      await getConfig();
+      const response = await axiosInstance.get(
+        `/api/v1/property/view-property`,
+        {
+          params: { property: currentPage}
+        }
+      );
       if (response && response.data.success) {
-        console.log("All property:", response.data);
+     
         setAllProperties(response.data.viewProperty || []);
         setTotalPage(Math.ceil(response.data.totalProperties / 8));
       } else {
-       
       }
     } catch (error) {
       console.log("Error in fetching properties:", error);
     }
   };
+  
 
   useEffect(() => {
     const query = new URLSearchParams(location.search);
@@ -72,7 +75,6 @@ const PropertiesPage = () => {
   //   [location.search]);: Extracts the property query parameter from the URL to set the initial currentPage.
   // [currentPage]);: Fetches properties whenever currentPage changes.
   useEffect(() => {
-    console.log("PropertiesPage loaded with current page:", currentPage);
     getAllProperties();
   }, [currentPage]);
 
@@ -94,57 +96,68 @@ const PropertiesPage = () => {
   return (
     <>
       <div className="">
-      <Carousel
-        autoPlay
-        infiniteLoop
-        showThumbs={false}
-        showStatus={false}
-        
-        renderIndicator={false}
-        emulateTouch
-        swipeable
-        showArrows={false}
-      >
-        <div className={`${darkMode ? "dark bg-black" : "light bg-white"}`}>
-          <img src={real2} alt="Property 1" className="h-[300px] w-[300px] object-cover" />
-        </div>
-        <div>
-          <img src={real3} alt="Property 2" className="h-[300px] w-[300px] object-cover" />
-        </div>
-        <div>
-          <img src={real4} alt="Property 3" className="h-[300px] w-[300px] object-cover" />
-        </div>
-        <div>
-          <img src={hero} alt="Property 4" className="h-[300px] w-[300px] object-cover" />
-        </div>
-      </Carousel>
-      <div
-        className={`${
-          darkMode ? "dark bg-black" : "light bg-transparent"
-        } z-10`}
-      >
+        <Carousel
+          autoPlay
+          infiniteLoop
+          showThumbs={false}
+          showStatus={false}
+          renderIndicator={false}
+          emulateTouch
+          swipeable
+          showArrows={false}
+        >
+          <div className={`${darkMode ? "dark bg-black" : "light bg-white"}`}>
+            <img
+              src={real2}
+              alt="Property 1"
+              className="h-[300px] w-[300px] object-cover"
+            />
+          </div>
+          <div>
+            <img
+              src={real3}
+              alt="Property 2"
+              className="h-[300px] w-[300px] object-cover"
+            />
+          </div>
+          <div>
+            <img
+              src={real4}
+              alt="Property 3"
+              className="h-[300px] w-[300px] object-cover"
+            />
+          </div>
+          <div>
+            <img
+              src={hero}
+              alt="Property 4"
+              className="h-[300px] w-[300px] object-cover"
+            />
+          </div>
+        </Carousel>
+        <div className="search-form">
+      <div className={`${darkMode ? "dark bg-black" : "light bg-transparent"} z-10`}>
         <div
           data-aos="zoom-in"
-          className={`${
-            darkMode ? "dark bg-gray-800" : "light bg-white"
-          } lg:w-[70%] m-auto grid lg:grid-cols-4 grid-cols-1 justify-center items-center gap-6 p-8 rounded-xl -mt-14`}
+          className={`${darkMode ? "dark bg-gray-800" : "light bg-white"} lg:w-[70%] m-auto grid lg:grid-cols-4 grid-cols-1 justify-center items-center gap-6 p-8 rounded-xl -mt-14`}
         >
           <div className="w-full">
-            <h1 className="text-black font-semibold dark:text-white">
-              Location
-            </h1>
+            <h1 className="text-black font-semibold dark:text-white">Location</h1>
             <input
               type="text"
-              placeholder="Enter a address"
+              placeholder="Enter an address"
+            
               className="bg-white p-2 w-full mt-2 border border-b-[1px] border-[#c9c7c1] rounded-md"
             />
           </div>
+
           <div className="w-full">
             <h1 className="text-black font-semibold dark:text-white">Type</h1>
             <select
               name="selectOption"
               className="bg-white p-2 border-b-[1px] w-full mt-2 border-[#c9c7c1] text-gray-500 rounded-md text-md"
               id="selectOption"
+           
             >
               <option value="" disabled selected>
                 Select Property
@@ -155,22 +168,22 @@ const PropertiesPage = () => {
               <option value="Land">Land</option>
             </select>
           </div>
+
           <div className="w-full">
-            <h1 className="text-black font-semibold dark:text-white">
-              Category
-            </h1>
+            <h1 className="text-black font-semibold dark:text-white">Category</h1>
             <select
               name="selectOption"
               className="bg-white rounded-md p-2 border-b-[1px] w-full mt-2 border-[#c9c7c1] text-gray-500 text-md"
               id="selectOption"
+           
             >
               <option value="" disabled selected>
                 Select Category
               </option>
-              <option value="Rent">Apartment</option>
-              <option value="Sell">Banglow</option>
-              <option value="Commercial">Duples</option>
-              <option value="Land">Condos</option>
+              <option value="Apartment">Apartment</option>
+              <option value="Banglow">Banglow</option>
+              <option value="Duplex">Duplex</option>
+              <option value="Condos">Condos</option>
             </select>
           </div>
 
@@ -178,6 +191,7 @@ const PropertiesPage = () => {
             <button
               type="submit"
               className="bg-violet-600 dark:bg-violet-600 hover:bg-violet-800 dark:hover:bg-violet-700 dark:hover:text-black text-lg p-4 w-full text-white font-semibold rounded-xl cursor-pointer transform hover:scale-110 transition-transform duration-300"
+             
             >
               Submit
             </button>
@@ -185,6 +199,7 @@ const PropertiesPage = () => {
         </div>
       </div>
     </div>
+      </div>
       <div className={`${darkMode ? "dark bg-black" : "light bg-transparent"}`}>
         <section
           id="properties"
@@ -194,9 +209,7 @@ const PropertiesPage = () => {
             <h1 data-aos="zoom-in" className="text-violet-500 dark:text-white">
               Properties
             </h1>
-            <h1
-              className="text-black text-4xl font-semibold dark:text-white"
-            >
+            <h1 className="text-black text-4xl font-semibold dark:text-white">
               Explore the latest
             </h1>
           </div>
@@ -215,46 +228,48 @@ const PropertiesPage = () => {
                 >
                   {property.images && property.images.length > 0 ? (
                     <Link to={`/property/${property.slug}`}>
-                    <div
-                      id="image-box"
-                      className="bg-cover bg-center h-[250px] rounded-xl p-4 flex flex-col justify-between items-end"
-                      style={{
-                        backgroundImage: `url(${url}/image/${property.images[0]})`,
-                      }}
-                    >
                       <div
-                        id="top"
-                        className="flex justify-between items-end w-full"
+                        id="image-box"
+                        className="bg-cover bg-center h-[250px] rounded-xl p-4 flex flex-col justify-between items-end"
+                        style={{
+                          backgroundImage: `url(${url}/image/${property.images[0]})`,
+                        }}
                       >
-                        <div>
-                          <button className="px-3 py-1 bg-violet-400 hover:bg-white hover:text-black text-white rounded-lg text-[13px] font-semibold">
-                            Featured
-                          </button>
+                        <div
+                          id="top"
+                          className="flex justify-between items-end w-full"
+                        >
+                          <div>
+                            <button className="px-3 py-1 bg-violet-400 hover:bg-white hover:text-black text-white rounded-lg text-[13px] font-semibold">
+                              Featured
+                            </button>
+                          </div>
+                          <div className="flex justify-between items-center gap-3">
+                            <button className="px-3 py-1 bg-violet-400 hover:bg-white hover:text-black text-white rounded-lg text-[13px] font-semibold">
+                              Sale
+                            </button>
+                            <button className="px-3 py-1 bg-violet-400 hover:bg-white hover:text-black text-white rounded-lg text-[13px] font-semibold">
+                              New
+                            </button>
+                          </div>
                         </div>
-                        <div className="flex justify-between items-center gap-3">
-                          <button className="px-3 py-1 bg-violet-400 hover:bg-white hover:text-black text-white rounded-lg text-[13px] font-semibold">
-                            Sale
-                          </button>
-                          <button className="px-3 py-1 bg-violet-400 hover:bg-white hover:text-black text-white rounded-lg text-[13px] font-semibold">
-                            New
-                          </button>
-                        </div>
-                      </div>
-                      <div
-                        id="bottom"
-                        className="flex justify-between items-end w-full"
-                      >
-                        <div className="flex justify-start items-center gap-2">
-                          <FaMapMarkerAlt className="size-4 text-white" />
+                        <div
+                          id="bottom"
+                          className="flex justify-between items-end w-full"
+                        >
+                          <div className="flex justify-start items-center gap-2">
+                            <FaMapMarkerAlt className="size-4 text-white" />
 
-                          <h1 className="text-white font-bold">{property.location}</h1>
-                        </div>
-                        <div className="flex justify-center items-center gap-4">
-                          <FaVideo className="size-4 text-white" />
-                          <FaCamera className="size-4 text-white" />
+                            <h1 className="text-white font-bold">
+                              {property.location}
+                            </h1>
+                          </div>
+                          <div className="flex justify-center items-center gap-4">
+                            <FaVideo className="size-4 text-white" />
+                            <FaCamera className="size-4 text-white" />
+                          </div>
                         </div>
                       </div>
-                    </div>
                     </Link>
                   ) : (
                     <div

@@ -1,37 +1,43 @@
-import {useState,useEffect, createContext, useContext} from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 import axios from "axios";
 
+const AuthContext = createContext();
 
-const AuthContext = createContext()
-const AuthProvider = ({children}) =>{
-const [auth,setAuth] = useState({
-    user:null,
-    token:"",
-})
-//default axios
-axios.defaults.headers.common["Authorization"]= `${auth?.token}`
-axios.defaults.headers.common["Muntasirul"] = "Developer"
+const AuthProvider = ({ children }) => {
+  const [auth, setAuth] = useState({
+    user: null,
+    token: "",
+  });
 
-useEffect(()=>{
-    const data = localStorage.getItem("auth")
-    if(data){
-        const parseData = JSON.parse(data)
-        setAuth({
-            ...auth,
-            user:parseData.user,
-            token:parseData.token
-        })
+  // Update axios defaults whenever auth.token changes
+  useEffect(() => {
+    if (auth?.token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${auth?.token}`;
+    } else {
+      delete axios.defaults.headers.common["Authorization"]; // Remove token if logged out
     }
-    //eslint-disable-next-line
-},[])
-return(
-    <AuthContext.Provider value={[auth,setAuth]}>
-        {children}
 
+    axios.defaults.headers.common["Muntasirul"] = "Developer"; // Custom header
+
+    // Load auth data from localStorage
+    const data = localStorage.getItem("auth");
+    if (data) {
+      const parsedData = JSON.parse(data);
+      setAuth({
+        user: parsedData.user,
+        token: parsedData.token,
+      });
+    }
+  }, [auth?.token]); // Dependency on auth.token
+
+  return (
+    <AuthContext.Provider value={[auth, setAuth]}>
+      {children}
     </AuthContext.Provider>
-)
-}
+  );
+};
 
-//custom hook
-const useAuth = () => useContext(AuthContext)
-export {useAuth,AuthProvider}
+// Custom hook for easier access
+const useAuth = () => useContext(AuthContext);
+
+export { useAuth, AuthProvider };

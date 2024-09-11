@@ -14,20 +14,20 @@ import notfound from "../assets/images/notfound.png";
 import { MdSpaceDashboard } from "react-icons/md";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import axios from "axios";
-
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { TbListDetails } from "react-icons/tb";
 import { WhatsappShareButton } from "react-share";
-const Properties = () => {
+import { axiosInstance, getConfig } from "../utils/ApiRequest";
+const Properties = ({ url }) => {
   const [allProperties, setAllProperties] = useState([]);
-  const navigate = useNavigate();
-  const url = "http://localhost:8080";
   const propertyUrl = "http://localhost:5173";
   const shareUrl = `${propertyUrl}`;
   const getProperties = async () => {
     try {
-      const response = await axios.get(`${url}/api/v1/property/view-property`);
+      await getConfig();
+      const response = await axiosInstance.get(
+        `/api/v1/property/view-property`
+      );
       if (response && response.data.success) {
         console.log("Property fetched:", response.data);
         setAllProperties(response.data.viewProperty || []);
